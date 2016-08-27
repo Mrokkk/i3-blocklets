@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ls --color=no /proc/ | grep "[0-9]" | wc -l
+
