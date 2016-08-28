@@ -1,0 +1,27 @@
+#!/bin/bash
+
+export LANG=C
+
+free_b=$(sed -n "s/MemFree://p" /proc/meminfo | sed "s/kB//g;s/ //g")
+total_b=$(sed -n "s/MemTotal://p" /proc/meminfo | sed "s/kB//g;s/ //g")
+
+free=$(numfmt --to=iec --from-unit=1024 --format="%.1f" $free_b)
+cached=$(sed -n "s/^Cached://p" /proc/meminfo | sed "s/kB//g" | xargs numfmt --to=iec --from-unit=1024 --format="%.1f")
+buffers=$(sed -n "s/^Buffers://p" /proc/meminfo | sed "s/kB//g" | xargs numfmt --to=iec --from-unit=1024 --format="%.1f")
+total=$(echo $total_b | numfmt --to=iec --from-unit=1024 --format="%.1f")
+
+percent=$(echo "$free_b * 100 / $total_b" | bc)
+
+if [ $percent -gt 70 ]; then
+    color="green"
+elif [ $percent -lt 30 ]; then
+    color="yellow"
+elif [ $percent -lt 10 ]; then
+    color="red"
+else
+    color="white"
+fi
+
+echo "FREE <span color='$color'>${free}</span> CACHE ${cached} BUFF ${buffers} TOTAL ${total}"
+
+# vim: filetype=sh
