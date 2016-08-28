@@ -1,13 +1,13 @@
 #!/bin/bash
 
 full_minutes=$(echo `cat /proc/uptime | grep -o '^[0-9]\+'` / 60 | bc)
-hours=$(echo ${full_minutes} / 60 | bc)
-minutes=$(echo "${full_minutes} - ${hours} * 60" | bc) 
+hours=$(echo $full_minutes / 60 | bc)
+minutes=$(echo "$full_minutes - $hours * 60" | bc)
 
-echo "${hours}h${minutes}"
+printf "%02dh%02d" $hours $minutes
 echo ""
-if [ ${hours} -ge 8 ]; then
-	echo "#00cc00"
+if [ $hours -ge 8 ]; then
+    echo "#00cc00"
 else
-	echo ""
+    echo ""
 fi
