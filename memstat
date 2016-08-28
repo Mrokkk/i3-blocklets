@@ -13,7 +13,7 @@ total=$(echo $total_b | numfmt --to=iec --from-unit=1024 --format="%.1f")
 percent=$(echo "$free_b * 100 / $total_b" | bc)
 
 if [ $percent -gt 70 ]; then
-    color="green"
+    color="#33cc33"
 elif [ $percent -lt 30 ]; then
     color="yellow"
 elif [ $percent -lt 10 ]; then
@@ -22,6 +22,6 @@ else
     color="white"
 fi
 
-echo "FREE <span color='$color'>${free}</span> CACHE ${cached} BUFF ${buffers} TOTAL ${total}"
+echo "<span color='$color'>FREE ${free}</span> CACHE ${cached} BUFF ${buffers} TOTAL ${total}"
 
 # vim: filetype=sh
