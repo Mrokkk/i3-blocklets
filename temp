@@ -1,6 +1,6 @@
 #!/bin/bash
 
-hwmon_dir=/sys/devices/platform/coretemp.0/hwmon/hwmon2/
+hwmon_dir=/sys/devices/platform/coretemp.0/hwmon/hwmon*/
 core_temps=`for temp in $(cd $hwmon_dir; ls | egrep "temp[2-99]_input"); do echo $(( $(<$hwmon_dir/$temp) / 1000 )); done`
 
 index=0
