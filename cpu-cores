@@ -1,8 +1,17 @@
 #!/bin/bash
 
 get_core_times () {
-    local core_number=$1
-    echo "$proc_stat" | sed -n "s/^cpu$core_number\s//p"
+    echo "$proc_stat" | sed -n "s/^cpu$1\s//p"
+}
+
+get_idle_and_total() {
+    for (( c=0; c<$n_cores; c++ )); do
+        core_time=($(get_core_times $c))
+        let "$1[$c]=core_time[3]+core_time[4]"
+        for i in {0..9}; do
+            let "$2[$c]=$2[$c]+core_time[$i]"
+        done
+    done
 }
 
 export LANG=C
@@ -14,33 +23,19 @@ idle_start=()
 idle_end=()
 
 proc_stat=$(grep cpu /proc/stat)
-for (( c=0; c<$n_cores; c++ )); do
-    core_time=($(get_core_times $c))
-    let "idle_start[$c]=core_time[3]+core_time[4]"
-    for i in {0..9}; do
-        let "total_start[$c]=total_start[$c]+core_time[$i]"
-    done
-done
+get_idle_and_total idle_start total_start
 
 sleep 2
 
-
 proc_stat=$(grep cpu /proc/stat)
+get_idle_and_total idle_end total_end
 
 for (( c=0; c<$n_cores; c++ )); do
-    core_time=($(get_core_times $c))
-    let "idle_end[$c]=core_time[3]+core_time[4]"
-    for i in {0..9}; do
-        let "total_end[$c]=total_end[$c]+core_time[$i]"
-    done
-done
-
-for (( c=0; c<$n_cores; c++ )); do
-    let "DIFF_IDLE=idle_end[$c]-idle_start[$c]"
-    let "DIFF_TOTAL=total_end[$c]-total_start[$c]"
+    idle=$((${idle_end[$c]}-${idle_start[$c]}))
+    total=$((${total_end[$c]}-${total_start[$c]}))
     color=""
-    DIFF_USAGE=`echo "scale=2; (1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL)/10" | bc`
-    int_usage=$(printf "%.0f" $DIFF_USAGE)
+    usage=`echo "scale=2; (1000*($total-$idle)/$total)/10" | bc`
+    int_usage=$(printf "%.0f" $usage)
     if [ $int_usage -gt 50 ]; then
         color="yellow"
     fi
@@ -49,8 +44,7 @@ for (( c=0; c<$n_cores; c++ )); do
     fi
     [[ -z $color ]] && color="#3399ff"
     if [ $c -gt 0 ]; then echo -n " "; fi
-    printf "<span color='$color'>C%d %06.2f%%</span>" $c $DIFF_USAGE
-
+    printf "<span color='$color'>C%d %06.2f%%</span>" $c $usage
 done
 
 echo
