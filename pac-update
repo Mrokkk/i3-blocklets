@@ -2,3 +2,4 @@
 
 pacman -Qu | wc -l
 
+# vim: filetype=sh

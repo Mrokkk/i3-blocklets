@@ -20,3 +20,5 @@ for temp in $core_temps; do
 done
 
 echo
+
+# vim: filetype=sh
