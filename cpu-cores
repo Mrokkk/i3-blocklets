@@ -47,9 +47,9 @@ for (( c=0; c<$n_cores; c++ )); do
     if [ $int_usage -gt 80 ]; then
         color="red"
     fi
-    [[ -z $color ]] && color="white"
+    [[ -z $color ]] && color="#3399ff"
     if [ $c -gt 0 ]; then echo -n " "; fi
-    printf "<span color='$color'>CORE%d %06.2f%%</span>" $c $DIFF_USAGE
+    printf "<span color='$color'>C%d %06.2f%%</span>" $c $DIFF_USAGE
 
 done
 

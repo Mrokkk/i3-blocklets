@@ -1,4 +1,4 @@
 #!/bin/bash
 
-ls --color=no /proc/ | grep "[0-9]" | wc -l
+echo "<span color='#ffb84d'>"`ls --color=no /proc/ | grep "[0-9]" | wc -l`"</span>"
 

@@ -10,7 +10,7 @@ for temp in $core_temps; do
     elif [ $temp -ge 70 ]; then
         color="red"
     else
-        color="white"
+        color="#b380ff"
     fi
     if [ $index -gt 0 ]; then
         echo -n " "
