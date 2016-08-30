@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ $BLOCK_BUTTON ]; then
+    notify-send "`cal`"
+fi
+
+date '+%c'
+
+# vim: filetype=sh

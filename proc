@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "<span color='#ffb84d'>"`ls --color=no /proc/ | grep "[0-9]" | wc -l`"</span>"
+echo "<span color='#cf6a4c'>"`ls --color=no /proc/ | grep "[0-9]" | wc -l`"</span>"
 
 # vim: filetype=sh
