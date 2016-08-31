@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+echo -n " <span background='#9966ff'><b>DISK</b></span><span color='#9966ff'></span> "
+
+# vim: filetype=sh

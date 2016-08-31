@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -n " <span background='#cf6a4c'><b>PROC</b></span><span color='#cf6a4c'></span> "
+
+# vim: filetype=sh

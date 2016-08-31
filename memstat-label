@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -n " <span background='#2d8659'><b>MEM_USAGE</b></span><span color='#2d8659'></span> "
+
+# vim: filetype=sh

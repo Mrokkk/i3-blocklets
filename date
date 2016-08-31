@@ -4,6 +4,8 @@ if [ $BLOCK_BUTTON ]; then
     notify-send "`cal`"
 fi
 
-date '+%c'
+echo -n "  "
+
+echo -n `date '+%c'`" "
 
 # vim: filetype=sh

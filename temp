@@ -9,13 +9,11 @@ for temp in $core_temps; do
 	    color="yellow"
     elif [ $temp -ge 70 ]; then
         color="red"
-    else
-        color="#cf6a4c"
     fi
-    if [ $index -gt 0 ]; then
-        echo -n " "
-    fi
-    echo -n "<span color='$color'>CORE$index $temp"$'\xc2\xb0'C"</span>"
+    echo -n " "
+    [[ ! -z $color ]] && "<span color='$color'>"
+    echo -n "<small>C$index:</small><b>$temp"$'\xc2\xb0'C"</b>"
+    [[ ! -z $color ]] && "</span>"
     let "index+=1"
 done
 

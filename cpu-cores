@@ -42,9 +42,10 @@ for (( c=0; c<$n_cores; c++ )); do
     if [ $int_usage -gt 80 ]; then
         color="red"
     fi
-    [[ -z $color ]] && color="#3399ff"
-    if [ $c -gt 0 ]; then echo -n " "; fi
-    printf "<span color='$color'>C%d:% 6.2f%%</span>" $c $usage
+    echo -n " "
+    [[ ! -z $color ]] && echo -n "<span color='$color'>"
+    printf "<small>C%d</small>:[<b>% 6.2f%%</b>]" $c $usage
+    [[ ! -z $color ]] && echo -n "</span>"
 done
 
 echo

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -n " <span background='#4d9900'><b>UPDATES</b></span><span color='#4d9900'></span> "
+
+# vim: filetype=sh
