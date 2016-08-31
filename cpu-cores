@@ -44,7 +44,7 @@ for (( c=0; c<$n_cores; c++ )); do
     fi
     [[ -z $color ]] && color="#3399ff"
     if [ $c -gt 0 ]; then echo -n " "; fi
-    printf "<span color='$color'>C%d:% 6.2f%%</span>" $c $usage
+    printf "<span color='$color'><small>C%d</small>:[<b>% 6.2f%%</b>]</span>" $c $usage
 done
 
 echo

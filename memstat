@@ -22,6 +22,6 @@ else
     color="white"
 fi
 
-echo "<span color='$color'>FREE ${free}</span> CACHE ${cached} BUFF ${buffers} TOTAL ${total}"
+echo "<small>FREE</small> <b>${free}</b> <small>CACHE</small> <b>${cached}</b> <small>BUFF</small> <b>${buffers}</b> <small>TOTAL</small> <b>${total}</b>"
 
 # vim: filetype=sh
